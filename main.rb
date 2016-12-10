@@ -3,8 +3,8 @@
 require 'dxruby'
 
 Window.caption = "PuyoPuyo"
-Window.width   = 800
-Window.height  = 600
+Window.width   = 640
+Window.height  = 480
 
 Window.loop do
 
