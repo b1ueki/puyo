@@ -28,8 +28,13 @@ class ControllablePuyoGroup < Sprite
      #回転
      if Input.key_push?(K_X)
        if @puyos[0].y < @puyos[1].y
-         @puyos[0].x += $IMG_WIDTH
-         @puyos[0].y += $IMG_HEIGHT
+         if @puyos[0].x == $RIGHT - $IMG_WIDTH
+           @puyos[0].y += $IMG_HEIGHT
+           @puyos[1].x -= $IMG_WIDTH
+         else
+          @puyos[0].x += $IMG_WIDTH
+          @puyos[0].y += $IMG_HEIGHT
+        end
        elsif @puyos[0].y > @puyos[1].y
          @puyos[0].x -= $IMG_WIDTH
          @puyos[0].y -= $IMG_HEIGHT
@@ -42,8 +47,13 @@ class ControllablePuyoGroup < Sprite
        end
      elsif Input.key_push?(K_Z)
        if @puyos[0].y < @puyos[1].y
-         @puyos[0].x -= $IMG_WIDTH
-         @puyos[0].y += $IMG_HEIGHT
+         if @puyos[0].x == $LEFT
+           @puyos[0].y += $IMG_HEIGHT
+           @puyos[1].x += $IMG_WIDTH
+         else
+          @puyos[0].x -= $IMG_WIDTH
+          @puyos[0].y += $IMG_HEIGHT
+        end
        elsif @puyos[0].y > @puyos[1].y
          @puyos[0].x += $IMG_WIDTH
          @puyos[0].y -= $IMG_HEIGHT
