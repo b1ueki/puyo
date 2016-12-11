@@ -1,4 +1,4 @@
-# coding: utf-8
+﻿# coding: utf-8
 
 require 'dxruby'
 require_relative 'controllable_puyo_group'
@@ -11,9 +11,18 @@ timer = 0
 font = Font.new(32)
 font2 = Font.new(16)
 haikei = Image.load('IMG/haikei.jpg')
+$puyocolors = [
+	Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 0]),
+	Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 0, 0]),
+	Image.new($IMG_WIDTH, $IMG_HEIGHT, [0, 255, 0]),
+	Image.new($IMG_WIDTH, $IMG_HEIGHT, [0, 0, 255])
+]
+def puyorandam
+	ControllablePuyoGroup.new(($RIGHT - $LEFT) / 2,$TOP,$puyocolors[rand(4)],$puyocolors[rand(4)])
 
+end
 fell_objects = Array.new
-fall_objects = ControllablePuyoGroup.new(($RIGHT - $LEFT) / 2,$TOP,Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 0]),Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 255]))
+fall_objects = puyorandam
 
 
 title_flg = true
@@ -40,7 +49,7 @@ Window.loop do
 
     if fall_objects.get_achieve == true
       fell_objects.push fall_objects
-      fall_objects = ControllablePuyoGroup.new(($RIGHT - $LEFT) / 2,$TOP,Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 0]),Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 255]))
+      fall_objects = puyorandam
       fall_objects.set_achieve false
     end
     
