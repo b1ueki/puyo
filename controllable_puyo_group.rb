@@ -74,6 +74,7 @@ class ControllablePuyoGroup < Sprite
      end
     else
       @achieve = true
+      #puts "#{@achieve.to_s}BOTTOMに到達"
     end
   end
   def draw
@@ -81,10 +82,12 @@ class ControllablePuyoGroup < Sprite
     @puyos[1].draw
   end
   def shot(obj)
-    @achieve = true
-    puts "shot"
+    p self
+    p obj
+      @achieve = true
+      puts "shot"
   end
   def hit(obj)
-    puts "hit"
+      puts "hit"
   end
 end

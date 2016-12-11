@@ -33,17 +33,28 @@ Window.loop do
     end
 
     if fall_objects.get_achieve == true
-      fell_objects.push fall_objects
+      fell_objects.push fall_objects.clone
+      fall_objects.vanish
       fall_objects = ControllablePuyoGroup.new(($RIGHT - $LEFT) / 2,$TOP,Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 0]),Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 255]))
-      fall_objects.set_achieve false
+      puts fall_objects.get_achieve
     end
-    
-    #puts fall_objects.count
-    puts fell_objects.count
 
-    Sprite.check(fall_objects, fell_objects, :shot, :hit)
+    #puts fall_objects
+    #puts fell_objects[-1]
+    puts fell_objects.count
+    #puts fell_objects [0]
+    #puts fell_objects [1]
+
     Sprite.update(fall_objects)
-    Sprite.draw(fall_objects)
+    Sprite.update(fell_objects)
+    #fall_objects.update
+    puts fall_objects.collision
+    
+    sprite = Sprite.check(fall_objects, fell_objects)
+    puts sprite
+
+    #Sprite.draw(fall_objects)
+    fall_objects.draw
     Sprite.draw(fell_objects)
   end
 end
