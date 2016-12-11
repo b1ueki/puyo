@@ -12,6 +12,35 @@ class ControllablePuyoGroup < Sprite
     @puyos[0].x -= $IMG_WIDTH if Input.key_push?(K_LEFT) && $LEFT < @puyos[0].x
     @puyos[1].x += $IMG_WIDTH if Input.key_push?(K_RIGHT) && $RIGHT - $IMG_WIDTH >= @puyos[1].x
     @puyos[1].x -= $IMG_WIDTH if Input.key_push?(K_LEFT) && $LEFT < @puyos[1].x
+    if Input.key_push?(K_X)
+      if @puyos[0].y < @puyos[1].y
+        @puyos[0].x += $IMG_WIDTH
+        @puyos[0].y += $IMG_HEIGHT
+      elsif @puyos[0].y > @puyos[1].y
+        @puyos[0].x -= $IMG_WIDTH
+        @puyos[0].y -= $IMG_HEIGHT
+      elsif @puyos[0].x > @puyos[1].x
+        @puyos[0].x -= $IMG_WIDTH
+        @puyos[0].y += $IMG_HEIGHT
+      else
+        @puyos[0].x += $IMG_WIDTH
+        @puyos[0].y -= $IMG_HEIGHT
+      end
+    elsif Input.key_push?(K_Z)
+      if @puyos[0].y < @puyos[1].y
+        @puyos[0].x -= $IMG_WIDTH
+        @puyos[0].y += $IMG_HEIGHT
+      elsif @puyos[0].y > @puyos[1].y
+        @puyos[0].x += $IMG_WIDTH
+        @puyos[0].y -= $IMG_HEIGHT
+      elsif @puyos[0].x > @puyos[1].x
+        @puyos[0].x -= $IMG_WIDTH
+        @puyos[0].y -= $IMG_HEIGHT
+      else
+        @puyos[0].x += $IMG_WIDTH
+        @puyos[0].y += $IMG_HEIGHT
+      end
+    end
   end
   def draw
     @puyos[0].draw
