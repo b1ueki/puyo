@@ -1,4 +1,4 @@
-﻿# coding: utf-8
+# coding: utf-8
 
 require 'dxruby'
 require_relative 'controllable_puyo_group'
@@ -7,8 +7,9 @@ require_relative 'puyo'
 Window.caption = "PuyoPuyo"
 Window.width   = 640
 Window.height  = 480
-
+timer = 0
 font = Font.new(32)
+font2 = Font.new(16)
 haikei = Image.load('IMG/haikei.jpg')
 game_objects = Array.new
 game_objects.push ControllablePuyoGroup.new(($RIGHT - $LEFT) / 2,$TOP,Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 0]),Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 255]))
@@ -19,7 +20,11 @@ Window.loop do
   if title_flg
     Window.draw_font(100, 100, "スペースキーを押してください。", font)
   else
+    timer +=1
+    timersec = (timer/60)%60
+    timermin = (timer/3600)
     Window.draw(0,0,haikei)
+    Window.draw_font(400,300,format("%02d:%02d",timermin,timersec),font)
     Window.draw_box_fill($LEFT-4,$TOP,$LEFT,$BOTTOM,[255,255,255],0)
     Window.draw_box_fill($LEFT-4,$BOTTOM,$RIGHT+4,$BOTTOM+4,[255,255,255],0)
     Window.draw_box_fill($RIGHT,$TOP,$RIGHT+4,$BOTTOM+4,[255,255,255],0)
