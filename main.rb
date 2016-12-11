@@ -95,15 +95,7 @@ Window.loop do
 
     #sprite = fall_objects.check(fell_objects)
     #p sprite
-    ary = Array.new
-    fell_objects.each do |fo|
-      ary << fo.get_puyos
-    end
-
-    p ary.flatten
-    p fall_objects.get_puyos
-
-    Sprite.check(fall_objects.get_puyos, ary.flatten)
+    Sprite.check(fall_objects.get_puyos, fell_objects)
 
     #Sprite.draw(fall_objects)
     fall_objects.draw
