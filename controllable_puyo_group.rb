@@ -3,15 +3,23 @@ require_relative 'setting'
 class ControllablePuyoGroup < Sprite
   def initialize(x, y, img1, img2)
     @achieve = false
-    super(x, y, img1)
-    @puyos = [Puyo.new(x,y,img1),Puyo.new(x,y + $IMG_HEIGHT,img2)]
+    super
+    @puyos = [Puyo.new(x,y,img1,self),Puyo.new(x,y + $IMG_HEIGHT,img2,self)]
+    self.image = img2
   end
+
   def get_achieve
     @achieve
   end
+
   def set_achieve(achieve)
     @achieve = achieve
   end
+
+  def get_puyos
+    @puyos
+  end
+
   def update
     #落下
       if @puyos[0].y < @puyos[1].y
@@ -25,7 +33,7 @@ class ControllablePuyoGroup < Sprite
         @puyos[1].update
       end
 
-    if @puyos[0].y < $BOTTOM - $IMG_HEIGHT && @puyos[1].y < $BOTTOM - $IMG_HEIGHT
+    if @puyos[0].y < $BOTTOM - $IMG_HEIGHT && @puyos[1].y < $BOTTOM - $IMG_HEIGHT && @achieve == false
       #平行移動
       @puyos[0].x += $IMG_WIDTH if Input.key_push?(K_RIGHT) && $RIGHT - $IMG_WIDTH > @puyos[0].x
       @puyos[0].x -= $IMG_WIDTH if Input.key_push?(K_LEFT) && $LEFT < @puyos[0].x
@@ -80,14 +88,5 @@ class ControllablePuyoGroup < Sprite
   def draw
     @puyos[0].draw
     @puyos[1].draw
-  end
-  def shot(obj)
-    p self
-    p obj
-      @achieve = true
-      puts "shot"
-  end
-  def hit(obj)
-      puts "hit"
   end
 end
