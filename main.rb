@@ -24,6 +24,7 @@ Window.loop do
     timersec = (timer/60)%60
     timermin = (timer/3600)
     Window.draw(0,0,haikei)
+    Window.draw_font(400,200,format("%06d",$score),font)
     Window.draw_font(400,300,format("%02d:%02d",timermin,timersec),font)
     Window.draw_box_fill($LEFT-4,$TOP,$LEFT,$BOTTOM,[255,255,255],0)
     Window.draw_box_fill($LEFT-4,$BOTTOM,$RIGHT+4,$BOTTOM+4,[255,255,255],0)
