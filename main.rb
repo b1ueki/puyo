@@ -11,8 +11,10 @@ timer = 0
 font = Font.new(32)
 font2 = Font.new(16)
 haikei = Image.load('IMG/haikei.jpg')
-game_objects = Array.new
-game_objects.push ControllablePuyoGroup.new(($RIGHT - $LEFT) / 2,$TOP,Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 0]),Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 255]))
+
+fell_objects = Array.new
+fall_objects = ControllablePuyoGroup.new(($RIGHT - $LEFT) / 2,$TOP,Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 0]),Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 255]))
+
 
 title_flg = true
 Window.loop do
@@ -34,7 +36,19 @@ Window.loop do
     11.times do |i|
     	Window.draw_line($LEFT,$TOP+$IMG_HEIGHT*(i+1),$RIGHT,$TOP+$IMG_HEIGHT*(i+1),C_WHITE)
     end
-    Sprite.update(game_objects)
-    Sprite.draw(game_objects)
+
+    if fall_objects.get_achieve == true
+      fell_objects.push fall_objects
+      fall_objects = ControllablePuyoGroup.new(($RIGHT - $LEFT) / 2,$TOP,Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 0]),Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 255]))
+      fall_objects.set_achieve false
+    end
+    
+    #puts fall_objects.count
+    puts fell_objects.count
+
+    Sprite.check(fall_objects, fell_objects, :shot, :hit)
+    Sprite.update(fall_objects)
+    Sprite.draw(fall_objects)
+    Sprite.draw(fell_objects)
   end
 end
