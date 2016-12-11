@@ -2,11 +2,14 @@ require_relative 'setting'
 
 class Puyo < Sprite
   PUYOCOLORS = [
-	Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 0]),
-	Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 0, 0]),
-	Image.new($IMG_WIDTH, $IMG_HEIGHT, [0, 255, 0]),
-	Image.new($IMG_WIDTH, $IMG_HEIGHT, [0, 0, 255])
+	Image.new($IMG_WIDTH, $IMG_HEIGHT, [200,255, 255, 0]),
+	Image.new($IMG_WIDTH, $IMG_HEIGHT, [200,255, 0, 0]),
+	Image.new($IMG_WIDTH, $IMG_HEIGHT, [200,0, 255, 0]),
+	Image.new($IMG_WIDTH, $IMG_HEIGHT, [200,0, 0, 255])
   ] 
+
+  attr :colorindex
+
   def initialize(x, y, colorindex)
     super(x, y, PUYOCOLORS[colorindex])
   	@colorindex = colorindex
