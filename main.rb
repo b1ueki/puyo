@@ -1,4 +1,4 @@
-﻿# coding: utf-8
+# coding: utf-8
 
 require 'dxruby'
 require_relative 'controllable_puyo_group'
@@ -43,6 +43,11 @@ Window.loop do
     end
 
     if fall_objects.get_achieve == true
+
+      #fell_objects.push fall_objects.clone
+      #fall_objects.vanish
+      #puts fall_objects.get_achieve
+      
       fell_objects.push fall_objects.get_puyos
       fall_objects = puyorandam
       fall_objects.set_achieve false
@@ -76,13 +81,32 @@ Window.loop do
       	$score += 50
       end
     end
-    
-    #puts fall_objects.count
-    puts fell_objects.count
 
-    Sprite.check(fall_objects, fell_objects, :shot, :hit)
+    #puts fall_objects
+    #puts fell_objects[-1]
+    #puts fell_objects.count
+    #puts fell_objects [0]
+    #puts fell_objects [1]
+
     Sprite.update(fall_objects)
-    Sprite.draw(fall_objects)
+    Sprite.update(fell_objects)
+    #fall_objects.update
+    #puts fall_objects.collision
+
+    #sprite = fall_objects.check(fell_objects)
+    #p sprite
+    ary = Array.new
+    fell_objects.each do |fo|
+      ary << fo.get_puyos
+    end
+
+    p ary.flatten
+    p fall_objects.get_puyos
+
+    Sprite.check(fall_objects.get_puyos, ary.flatten)
+
+    #Sprite.draw(fall_objects)
+    fall_objects.draw
     Sprite.draw(fell_objects)
   end
 end
