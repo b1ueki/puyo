@@ -43,9 +43,38 @@ Window.loop do
     end
 
     if fall_objects.get_achieve == true
-      fell_objects.push fall_objects
+      fell_objects.push fall_objects.get_puyos
       fall_objects = puyorandam
       fall_objects.set_achieve false
+ 
+      fell_objects.flatten!
+
+      to_vanish_objs = []
+      fell_objects.each do |obj1|
+      	kouho_to_vanish_objs = []
+      	fell_objects.each do |obj2|
+      	  next if obj1 == obj2
+      	  next if obj1.colorindex != obj2.colorindex
+
+      	  if (obj1.x - obj2.x).abs <= $IMG_WIDTH && obj1.y == obj2.y
+      		kouho_to_vanish_objs.push obj1
+      		kouho_to_vanish_objs.push obj2
+      	  end
+      	  if obj1.x == obj2.x && (obj1.y - obj2.y).abs <= $IMG_HEIGHT
+      		kouho_to_vanish_objs.push obj1
+      		kouho_to_vanish_objs.push obj2
+      	  end
+      	end
+      	if kouho_to_vanish_objs.length >= 3
+      		to_vanish_objs.concat kouho_to_vanish_objs
+      	end
+      end
+      to_vanish_objs.uniq!
+      to_vanish_objs.each do |obj|
+      	obj.vanish
+      	fell_objects.delete obj
+      	$score += 50
+      end
     end
     
     #puts fall_objects.count

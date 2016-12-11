@@ -12,6 +12,9 @@ class ControllablePuyoGroup < Sprite
   def set_achieve(achieve)
     @achieve = achieve
   end
+  def get_puyos
+    @puyos
+  end
   def update
     #落下
       if @puyos[0].y < @puyos[1].y
