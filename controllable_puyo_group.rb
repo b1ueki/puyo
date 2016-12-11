@@ -1,10 +1,10 @@
 require_relative 'setting'
 
 class ControllablePuyoGroup < Sprite
-  def initialize(x, y, img1, img2)
+  def initialize(x, y, colorindex1, colorindex2)
     @achieve = false
-    super(x, y, img1)
-    @puyos = [Puyo.new(x,y,img1),Puyo.new(x,y + $IMG_HEIGHT,img2)]
+    super(x, y)
+    @puyos = [Puyo.new(x,y,colorindex1),Puyo.new(x,y + $IMG_HEIGHT,colorindex2)]
   end
   def get_achieve
     @achieve

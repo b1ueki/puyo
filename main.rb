@@ -11,14 +11,9 @@ timer = 0
 font = Font.new(32)
 font2 = Font.new(16)
 haikei = Image.load('IMG/haikei.jpg')
-$puyocolors = [
-	Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 255, 0]),
-	Image.new($IMG_WIDTH, $IMG_HEIGHT, [255, 0, 0]),
-	Image.new($IMG_WIDTH, $IMG_HEIGHT, [0, 255, 0]),
-	Image.new($IMG_WIDTH, $IMG_HEIGHT, [0, 0, 255])
-]
+
 def puyorandam
-	ControllablePuyoGroup.new(($RIGHT - $LEFT) / 2,$TOP,$puyocolors[rand(4)],$puyocolors[rand(4)])
+	ControllablePuyoGroup.new(($RIGHT - $LEFT) / 2,$TOP,rand(4),rand(4))
 
 end
 fell_objects = Array.new
