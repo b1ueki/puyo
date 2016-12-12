@@ -35,10 +35,22 @@ class ControllablePuyoGroup < Sprite
 
     if @puyos[0].y < $BOTTOM - $IMG_HEIGHT && @puyos[1].y < $BOTTOM - $IMG_HEIGHT && @achieve == false
       #平行移動
-      @puyos[0].x += $IMG_WIDTH if Input.key_push?(K_RIGHT) && $RIGHT - $IMG_WIDTH > @puyos[0].x
-      @puyos[0].x -= $IMG_WIDTH if Input.key_push?(K_LEFT) && $LEFT < @puyos[0].x
-      @puyos[1].x += $IMG_WIDTH if Input.key_push?(K_RIGHT) && $RIGHT - $IMG_WIDTH > @puyos[1].x
-      @puyos[1].x -= $IMG_WIDTH if Input.key_push?(K_LEFT) && $LEFT < @puyos[1].x
+      if @puyos[0].y != @puyos[1].y
+        @puyos[0].x += $IMG_WIDTH if Input.key_push?(K_RIGHT) && $RIGHT - $IMG_WIDTH > @puyos[0].x
+        @puyos[0].x -= $IMG_WIDTH if Input.key_push?(K_LEFT) && $LEFT < @puyos[0].x
+        @puyos[1].x += $IMG_WIDTH if Input.key_push?(K_RIGHT) && $RIGHT - $IMG_WIDTH > @puyos[1].x
+        @puyos[1].x -= $IMG_WIDTH if Input.key_push?(K_LEFT) && $LEFT < @puyos[1].x
+      elsif @puyos[0].x > @puyos[1].x
+        @puyos[0].x += $IMG_WIDTH if Input.key_push?(K_RIGHT) && $RIGHT - $IMG_WIDTH > @puyos[0].x
+        @puyos[0].x -= $IMG_WIDTH if Input.key_push?(K_LEFT) && $LEFT + $IMG_WIDTH < @puyos[0].x
+        @puyos[1].x += $IMG_WIDTH if Input.key_push?(K_RIGHT) && $RIGHT - $IMG_WIDTH * 2 > @puyos[1].x
+        @puyos[1].x -= $IMG_WIDTH if Input.key_push?(K_LEFT) && $LEFT < @puyos[1].x
+      else
+        @puyos[0].x += $IMG_WIDTH if Input.key_push?(K_RIGHT) && $RIGHT - $IMG_WIDTH * 2 > @puyos[0].x
+        @puyos[0].x -= $IMG_WIDTH if Input.key_push?(K_LEFT) && $LEFT + $IMG_WIDTH < @puyos[0].x
+        @puyos[1].x += $IMG_WIDTH if Input.key_push?(K_RIGHT) && $RIGHT > @puyos[1].x
+        @puyos[1].x -= $IMG_WIDTH if Input.key_push?(K_LEFT) && $LEFT + $IMG_WIDTH < @puyos[1].x
+      end
 
      #回転
      if Input.key_push?(K_X)
