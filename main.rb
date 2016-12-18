@@ -51,7 +51,6 @@ Window.loop do
     timersec = (timer/60)%60
     timermin = (timer/3600)
     Window.drawEx(0, 0, haikei,{scale_x:0.15625,scale_y:0.23,center_x:0,center_y:0})
-    #Window.draw(0,0,haikei)
     Window.draw_font(300,180, "スコア", font2,color:C_BLACK)
     Window.draw_font(300,200,format("%06d",$score),font,color:C_BLACK)
     Window.draw_font(300,280, "タイム", font2,color:C_BLACK)
@@ -72,9 +71,6 @@ Window.loop do
       	#ぷよが生成される座標で止まった時
       	gameover_flg = true
       end
-
-      #fall_objects.vanish
-      #puts fall_objects.get_achieve
 
       $fell_objects.push fall_objects.get_puyos
       fall_objects = puyorandam
@@ -114,22 +110,10 @@ Window.loop do
       end
     end
 
-    #puts fall_objects
-    #puts $fell_objects[-1]
-    #puts $fell_objects.count
-    #puts $fell_objects [0]
-    #puts $fell_objects [1]
-
     Sprite.update(fall_objects)
     Sprite.update($fell_objects)
-    #fall_objects.update
-    #puts fall_objects.collision
-
-    #sprite = fall_objects.check($fell_objects)
-    #p sprite
     Sprite.check(fall_objects.get_puyos, $fell_objects)
 
-    #Sprite.draw(fall_objects)
     fall_objects.draw
     Sprite.draw($fell_objects)
   end
