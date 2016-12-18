@@ -42,10 +42,6 @@ Window.loop do
 
     if fall_objects.get_achieve == true
 
-      #$fell_objects.push fall_objects.clone
-      #fall_objects.vanish
-      #puts fall_objects.get_achieve
-
       $fell_objects.push fall_objects.get_puyos
       fall_objects = puyorandam
       fall_objects.set_achieve false
@@ -80,22 +76,10 @@ Window.loop do
       end
     end
 
-    #puts fall_objects
-    #puts $fell_objects[-1]
-    #puts $fell_objects.count
-    #puts $fell_objects [0]
-    #puts $fell_objects [1]
-
     Sprite.update(fall_objects)
     Sprite.update($fell_objects)
-    #fall_objects.update
-    #puts fall_objects.collision
-
-    #sprite = fall_objects.check($fell_objects)
-    #p sprite
     Sprite.check(fall_objects.get_puyos, $fell_objects)
 
-    #Sprite.draw(fall_objects)
     fall_objects.draw
     Sprite.draw($fell_objects)
   end
