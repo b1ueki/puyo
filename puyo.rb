@@ -17,7 +17,17 @@ class Puyo < Sprite
     self.parent = parent
   end
 
+  def set_achieve(achieve)
+      self.parent.set_achieve achieve
+  end
+
   def update
+    self.parent.set_achieve false
+    $fell_objects.each do |obj|
+      if self.x == obj.x && self.y == obj.y - $IMG_HEIGHT
+          self.parent.set_achieve true
+      end
+    end
     if self.parent.get_achieve == false
       self.y += 1 if self.y < $BOTTOM - $IMG_HEIGHT
     end

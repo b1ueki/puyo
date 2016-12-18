@@ -79,6 +79,7 @@ Window.loop do
     Sprite.update(fall_objects)
     Sprite.update($fell_objects)
     Sprite.check(fall_objects.get_puyos, $fell_objects)
+		#Sprite.check($fell_objects)
 
     fall_objects.draw
     Sprite.draw($fell_objects)

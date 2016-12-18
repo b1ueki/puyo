@@ -175,7 +175,6 @@ class ControllablePuyoGroup < Sprite
       end
     else
       @achieve = true
-      #puts "#{@achieve.to_s}BOTTOMに到達"
     end
   end
   def draw
