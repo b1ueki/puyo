@@ -36,10 +36,10 @@ Window.loop do
   	Window.draw_font(200, 400, "リトライ? y/n", font)
   	if Input.keyPush?(K_Y)
   	  gameover_flg = false
-  	  fell_objects.each do |obj|
+  	  $fell_objects.each do |obj|
       	obj.vanish
       end
-  	  fell_objects.clear
+  	  $fell_objects.clear
   	  fall_objects = puyorandam
   	  $score = 0
   	  timer = 0
