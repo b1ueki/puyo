@@ -17,11 +17,9 @@ gameoverimg = Image.load('IMG/l_144.jpg')
 
 def puyorandam
 	ControllablePuyoGroup.new(($RIGHT - $LEFT) / 2,$TOP,rand(4),rand(4))
-
 end
-fell_objects = Array.new
-fall_objects = puyorandam
 
+fall_objects = puyorandam
 
 title_flg = true
 gameover_flg = false
@@ -75,20 +73,19 @@ Window.loop do
       	gameover_flg = true
       end
 
-      #fell_objects.push fall_objects.clone
       #fall_objects.vanish
       #puts fall_objects.get_achieve
-      
-      fell_objects.push fall_objects.get_puyos
+
+      $fell_objects.push fall_objects.get_puyos
       fall_objects = puyorandam
       fall_objects.set_achieve false
- 
-      fell_objects.flatten!
+
+      $fell_objects.flatten!
 
       to_vanish_objs = []
-      fell_objects.each do |obj1|
+      $fell_objects.each do |obj1|
       	kouho_to_vanish_objs = []
-      	fell_objects.each do |obj2|
+      	$fell_objects.each do |obj2|
       	  next if obj1 == obj2
       	  next if obj1.colorindex != obj2.colorindex
 
@@ -108,7 +105,7 @@ Window.loop do
       to_vanish_objs.uniq!
       to_vanish_objs.each do |obj|
       	obj.vanish
-      	fell_objects.delete obj
+      	$fell_objects.delete obj
       	$score += 50
       end
       if to_vanish_objs.length >= 1
@@ -118,22 +115,22 @@ Window.loop do
     end
 
     #puts fall_objects
-    #puts fell_objects[-1]
-    #puts fell_objects.count
-    #puts fell_objects [0]
-    #puts fell_objects [1]
+    #puts $fell_objects[-1]
+    #puts $fell_objects.count
+    #puts $fell_objects [0]
+    #puts $fell_objects [1]
 
     Sprite.update(fall_objects)
-    Sprite.update(fell_objects)
+    Sprite.update($fell_objects)
     #fall_objects.update
     #puts fall_objects.collision
 
-    #sprite = fall_objects.check(fell_objects)
+    #sprite = fall_objects.check($fell_objects)
     #p sprite
-    Sprite.check(fall_objects.get_puyos, fell_objects)
+    Sprite.check(fall_objects.get_puyos, $fell_objects)
 
     #Sprite.draw(fall_objects)
     fall_objects.draw
-    Sprite.draw(fell_objects)
+    Sprite.draw($fell_objects)
   end
 end
