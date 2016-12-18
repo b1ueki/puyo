@@ -130,7 +130,7 @@ class ControllablePuyoGroup < Sprite
       #回転
       if Input.key_push?(K_X)
         if @puyos[0].y < @puyos[1].y
-          if @puyos[0].x != $RIGHT - $IMG_WIDTH * 2 && puyo_movable_blocks[0][8]
+          if @puyos[0].x < $RIGHT - $IMG_WIDTH * 2 && puyo_movable_blocks[0][8]
             @puyos[0].x += $IMG_WIDTH
             @puyos[0].y += $IMG_HEIGHT
           end
