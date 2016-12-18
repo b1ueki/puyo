@@ -10,7 +10,10 @@ Window.height  = 480
 timer = 0
 font = Font.new(32)
 font2 = Font.new(16)
-haikei = Image.load('IMG/haikei.jpg')
+font3 = Font.new(24)
+haikei = Image.load('IMG/l_244.jpg')
+titleimg = Image.load('IMG/titleimage.jpg')
+gameoverimg = Image.load('IMG/l_144.jpg')
 
 def puyorandam
 	ControllablePuyoGroup.new(($RIGHT - $LEFT) / 2,$TOP,rand(4),rand(4))
@@ -25,8 +28,11 @@ gameover_flg = false
 Window.loop do
   title_flg = false if Input.keyPush?(K_SPACE)
   if title_flg
-    Window.draw_font(100, 100, "スペースキーを押してください。", font)
+  	Window.drawEx(0, 0, titleimg,{scale_x:0.5,scale_y:0.6,center_x:0,center_y:0})
+    Window.draw_font(150, 100, "ぷ○ぷ○風ゲームです。", font)
+    Window.draw_font(200, 200, "スペースキーでスタート", font3)
   elsif gameover_flg
+  	Window.drawEx(0, 0, gameoverimg,{scale_x:0.15625,scale_y:0.23,center_x:0,center_y:0})
   	Window.draw_font(200, 100, "ゲームオーバー", font)
   	Window.draw_font(200, 300, format("スコア:%6d",$score), font)
   	Window.draw_font(200, 400, "リトライ? y/n", font)
@@ -46,17 +52,20 @@ Window.loop do
     timer +=1
     timersec = (timer/60)%60
     timermin = (timer/3600)
-    Window.draw(0,0,haikei)
-    Window.draw_font(400,200,format("%06d",$score),font)
-    Window.draw_font(400,300,format("%02d:%02d",timermin,timersec),font)
-    Window.draw_box_fill($LEFT-4,$TOP,$LEFT,$BOTTOM,[255,255,255],0)
-    Window.draw_box_fill($LEFT-4,$BOTTOM,$RIGHT+4,$BOTTOM+4,[255,255,255],0)
-    Window.draw_box_fill($RIGHT,$TOP,$RIGHT+4,$BOTTOM+4,[255,255,255],0)
+    Window.drawEx(0, 0, haikei,{scale_x:0.15625,scale_y:0.23,center_x:0,center_y:0})
+    #Window.draw(0,0,haikei)
+    Window.draw_font(300,180, "スコア", font2,color:C_BLACK)
+    Window.draw_font(300,200,format("%06d",$score),font,color:C_BLACK)
+    Window.draw_font(300,280, "タイム", font2,color:C_BLACK)
+    Window.draw_font(300,300,format("%02d:%02d",timermin,timersec),font,color:C_BLACK)
+    Window.draw_box_fill($LEFT-4,$TOP,$LEFT,$BOTTOM,C_BLACK,0)
+    Window.draw_box_fill($LEFT-4,$BOTTOM,$RIGHT+4,$BOTTOM+4,C_BLACK,0)
+    Window.draw_box_fill($RIGHT,$TOP,$RIGHT+4,$BOTTOM+4,C_BLACK,0)
     5.times do |i|
-    	Window.draw_line($LEFT+$IMG_WIDTH*(i+1),$TOP,$LEFT+$IMG_WIDTH*(i+1),$BOTTOM,C_WHITE)
+    	Window.draw_line($LEFT+$IMG_WIDTH*(i+1),$TOP,$LEFT+$IMG_WIDTH*(i+1),$BOTTOM,C_BLACK)
     end
     11.times do |i|
-    	Window.draw_line($LEFT,$TOP+$IMG_HEIGHT*(i+1),$RIGHT,$TOP+$IMG_HEIGHT*(i+1),C_WHITE)
+    	Window.draw_line($LEFT,$TOP+$IMG_HEIGHT*(i+1),$RIGHT,$TOP+$IMG_HEIGHT*(i+1),C_BLACK)
     end
 
     if fall_objects.get_achieve == true
