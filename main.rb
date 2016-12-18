@@ -29,7 +29,19 @@ Window.loop do
   elsif gameover_flg
   	Window.draw_font(200, 100, "ゲームオーバー", font)
   	Window.draw_font(200, 300, format("スコア:%6d",$score), font)
-
+  	Window.draw_font(200, 400, "リトライ? y/n", font)
+  	if Input.keyPush?(K_Y)
+  	  gameover_flg = false
+  	  fell_objects.each do |obj|
+      	obj.vanish
+      end
+  	  fell_objects.clear
+  	  fall_objects = puyorandam
+  	  $score = 0
+  	  timer = 0
+  	elsif Input.keyPush?(K_N)
+  	  break
+  	end
   else
     timer +=1
     timersec = (timer/60)%60
