@@ -1,4 +1,4 @@
-# coding: utf-8
+﻿# coding: utf-8
 
 require 'dxruby'
 require_relative 'controllable_puyo_group'
@@ -21,10 +21,15 @@ fall_objects = puyorandam
 
 
 title_flg = true
+gameover_flg = false
 Window.loop do
   title_flg = false if Input.keyPush?(K_SPACE)
   if title_flg
     Window.draw_font(100, 100, "スペースキーを押してください。", font)
+  elsif gameover_flg
+  	Window.draw_font(200, 100, "ゲームオーバー", font)
+  	Window.draw_font(200, 300, format("スコア:%6d",$score), font)
+
   else
     timer +=1
     timersec = (timer/60)%60
@@ -43,6 +48,11 @@ Window.loop do
     end
 
     if fall_objects.get_achieve == true
+
+      if fall_objects.get_puyos[0].y < $TOP + $IMG_HEIGHT*2
+      	#ぷよが生成される座標で止まった時
+      	gameover_flg = true
+      end
 
       #fell_objects.push fall_objects.clone
       #fall_objects.vanish
@@ -79,6 +89,10 @@ Window.loop do
       	obj.vanish
       	fell_objects.delete obj
       	$score += 50
+      end
+      if to_vanish_objs.length >= 1
+      	#ぷよが消えた時
+      	gameover_flg = false
       end
     end
 
